@@ -7,17 +7,23 @@ import EditableTodo from "./EditableTodo";
  * - todos: array of [ todo, ... ]
  * - update(): fn to call to update a todo
  * - remove(): fn to call to remove a todo
+ * 
+ * State: 
+ * - none
  *
  * TodoApp -> EditableTodoList -> [ EditableTodo, ... ]
  */
 
-function EditableTodoList() {
+function EditableTodoList({ todos, update, remove }) {
   return (
       <div>
-        {/*   FIXME  */}
-        <EditableTodo />
-        <EditableTodo />
-        <EditableTodo />
+        {todos.map(todo => {
+          return (
+          <EditableTodo key={todo.id} 
+                        todo={todo} 
+                        update={update} 
+                        remove={remove} />
+        )})}
       </div>
   );
 }

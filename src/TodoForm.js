@@ -16,15 +16,13 @@ import React, { useState } from "react";
  */
 
 const INITIAL_STATE = {
-  id: "",
   title: "",
   description: "",
-  priority: "",
+  priority: 1,
 }
 
-function TodoForm( { addToDo } ) {
-  const [formData, setFormData] = useState(INITIAL_STATE);
-
+function TodoForm( { initalFormData=INITIAL_STATE, handleSave } ) {
+  const [formData, setFormData] = useState(initalFormData);
 
   /** Update form input. */
   function handleChange(evt) { 
@@ -39,7 +37,7 @@ function TodoForm( { addToDo } ) {
   function handleSubmit(evt) {
     evt.preventDefault();
     console.log("Check out state ->", formData);
-    addTodo(formData);
+    handleSave(formData);
     setFormData(INITIAL_STATE);
   }
 
@@ -53,7 +51,7 @@ function TodoForm( { addToDo } ) {
               className="form-control"
               placeholder="Title"
               onChange={handleChange}
-              value="FIXME"
+              value={formData.title}
               aria-label="Title"
           />
         </div>
@@ -65,7 +63,7 @@ function TodoForm( { addToDo } ) {
               className="form-control"
               placeholder="Description"
               onChange={handleChange}
-              value="FIXME"
+              value={formData.description}
               aria-label="Description"
           />
         </div>
@@ -77,7 +75,7 @@ function TodoForm( { addToDo } ) {
             </label>
             <select id="newTodo-priority"
                     name="priority"
-                    value="FIXME"
+                    value={formData.priority}
                     onChange={handleChange}
                     className="form-control form-control-sm d-inline-flex"
             >
